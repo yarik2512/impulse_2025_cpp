@@ -9,6 +9,10 @@ chmod +x build.sh
 
 ## Запуск программы
 ```bash
+./build/task path
+```
+где ```path``` - путь к входному файлу. Готовые входные файлы:
+```bash
 ./build/task input/test_N.txt
 ```
 где ```N``` - номер теста (```1-9```).
