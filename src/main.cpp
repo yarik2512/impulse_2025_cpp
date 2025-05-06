@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     if (std::freopen(argv[1], "r", stdin) == nullptr) {
-        std::cout << "Failed to open input file" << std::endl;
+        std::cout << "Failed to open input file: " << argv[1] << std::endl;
         return 0;
     }
     Club club;
