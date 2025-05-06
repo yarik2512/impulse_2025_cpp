@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc != 2 || argv[1] == nullptr) {
-        std::cout << "Wrong args! Usage: task.exe <input_file>" << std::endl;
+        std::cout << "Wrong args! Usage: task <input_file>" << std::endl;
         return 0;
     }
     if (std::freopen(argv[1], "r", stdin) == nullptr) {
