@@ -44,7 +44,7 @@ void Club::process_action(const Action &action) {
             if (free_pcs > 0) {
                 throw Action(action.time, 13, "ICanWaitNoLonger");
             }
-            if (clients_queue.size() > n_pcs) {
+            if (clients_queue.size() >= n_pcs) {
                 throw Action(action.time, 11, action.client);
             }
             clients_queue.push(action.client);
