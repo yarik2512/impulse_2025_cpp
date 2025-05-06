@@ -38,6 +38,8 @@ public:
 
     [[nodiscard]] std::vector<std::pair<unsigned long long, mins> > get_pc_info() const;
 
+    [[nodiscard]] int get_n_pcs() const;
+
     friend std::istream &operator>>(std::istream &in, Club &club);
 };
 

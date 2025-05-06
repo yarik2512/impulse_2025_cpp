@@ -21,9 +21,22 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     sout << club.get_open_time() << std::endl;
+    Club::time_point prev_time = club.get_open_time();
     try {
         Action a;
         while (std::cin >> a) {
+            const bool client_valid = !a.client.empty() && std::all_of(a.client.begin(), a.client.end(),
+                                                                       [](char c) {
+                                                                           return std::islower(c) || std::isdigit(c);
+                                                                       });
+            const bool pc_valid = 1 <= a.pc && a.pc <= club.get_n_pcs();
+            const bool time_valid = a.time >= prev_time;
+            prev_time = a.time;
+            if (!client_valid || !pc_valid || !time_valid) {
+                std::stringstream ss;
+                ss << a;
+                throw std::runtime_error(ss.str());
+            }
             sout << a << std::endl;
             try {
                 club.process_action(a);

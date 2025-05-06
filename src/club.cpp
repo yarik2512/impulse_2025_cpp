@@ -92,6 +92,11 @@ std::vector<std::pair<unsigned long long, Club::mins> > Club::get_pc_info() cons
     return pc_info;
 }
 
+int Club::get_n_pcs() const {
+    return n_pcs;
+}
+
+
 std::istream &operator>>(std::istream &in, Club &club) {
     std::string input;
     std::getline(in, input);
