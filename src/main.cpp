@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     sout << club.get_open_time() << std::endl;
-    Club::time_point prev_time = club.get_open_time();
+    Club::time_point prev_time{};
     try {
         Action a;
         while (std::cin >> a) {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
                                                                        [](char c) {
                                                                            return std::islower(c) || std::isdigit(c);
                                                                        });
-            const bool pc_valid = 1 <= a.pc && a.pc <= club.get_n_pcs();
+            const bool pc_valid = a.id != 2 || (0 <= a.pc && a.pc < club.get_n_pcs());
             prev_time = a.time;
             if (!time_valid || !id_valid || !client_valid || !pc_valid) {
                 std::stringstream ss;
