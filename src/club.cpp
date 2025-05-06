@@ -75,10 +75,11 @@ void Club::process_action(const Action &action) {
 std::vector<Action> Club::process_remaining_clients() {
     std::vector<Action> remaining_clients;
     for (const auto &[client, pc]: clients) {
+        remaining_clients.emplace_back(close_time, 11, client);
+        if (pc == -1) continue;
         income[pc] += std::chrono::ceil<hours>(close_time - pc_start[pc]).count() * cost;
         up_time[pc] += std::chrono::ceil<mins>(close_time - pc_start[pc]);
         pc_start[pc] = time_point();
-        remaining_clients.emplace_back(close_time, 11, client);
     }
     return remaining_clients;
 }
