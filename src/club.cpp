@@ -9,6 +9,7 @@ Club::time_point Club::get_close_time() const {
 }
 
 void Club::process_action(const Action &action) {
+    if (action.id != 1 && action.time > close_time) return;
     switch (action.id) {
         case 1:
             if (clients.contains(action.client)) {
