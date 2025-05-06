@@ -10,3 +10,11 @@ add_library(club src/club.cpp src/club.h)
 add_executable(task src/main.cpp)
 
 target_link_libraries(task chronoio action club)
+
+enable_testing()
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+add_executable(test_club test/main.cpp)
+target_link_libraries(test_club chronoio action club ${GTEST_LIBRARIES} pthread)
+add_test(NAME test_club COMMAND test_club)
