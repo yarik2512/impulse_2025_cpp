@@ -18,9 +18,9 @@ private:
     int n_pcs{};
     int free_pcs{};
     std::vector<time_point> pc_start;
-    std::vector<unsigned long long> income;
+    std::vector<long long> income;
     std::vector<mins> up_time;
-    unsigned long long cost{};
+    long long cost{};
     time_point open_time, close_time;
     std::map<std::string, int> clients;
     std::queue<std::string> clients_queue;
@@ -36,7 +36,7 @@ public:
 
     [[nodiscard]] std::vector<Action> process_remaining_clients();
 
-    [[nodiscard]] std::vector<std::pair<unsigned long long, mins> > get_pc_info() const;
+    [[nodiscard]] std::vector<std::pair<long long, mins> > get_pc_info() const;
 
     [[nodiscard]] int get_n_pcs() const;
 

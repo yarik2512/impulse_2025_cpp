@@ -84,8 +84,8 @@ std::vector<Action> Club::process_remaining_clients() {
     return remaining_clients;
 }
 
-std::vector<std::pair<unsigned long long, Club::mins> > Club::get_pc_info() const {
-    std::vector<std::pair<unsigned long long, mins> > pc_info(n_pcs);
+std::vector<std::pair<long long, Club::mins> > Club::get_pc_info() const {
+    std::vector<std::pair<long long, mins> > pc_info(n_pcs);
     for (int i = 0; i < n_pcs; ++i) {
         pc_info[i] = {income[i], up_time[i]};
     }
@@ -96,13 +96,12 @@ int Club::get_n_pcs() const {
     return n_pcs;
 }
 
-
 std::istream &operator>>(std::istream &in, Club &club) {
     std::string input;
     std::getline(in, input);
     std::stringstream ss(input);
     ss >> club.n_pcs;
-    if (ss.fail()) {
+    if (ss.fail() || club.n_pcs <= 0 || (ss >> std::ws && !ss.eof())) {
         throw std::runtime_error(input);
     }
     std::getline(in, input);
@@ -112,12 +111,15 @@ std::istream &operator>>(std::istream &in, Club &club) {
     } catch (const std::runtime_error &) {
         throw std::runtime_error(input);
     }
-    if (ss.fail()) {
+    if (ss.fail() || club.close_time < club.open_time || (ss >> std::ws && !ss.eof())) {
         throw std::runtime_error(input);
     }
     std::getline(in, input);
     ss = std::stringstream(input);
     ss >> club.cost;
+    if (ss.fail() || club.cost <= 0 || (ss >> std::ws && !ss.eof())) {
+        throw std::runtime_error(input);
+    }
     club.free_pcs = club.n_pcs;
     club.pc_start.resize(club.n_pcs);
     club.income.resize(club.n_pcs);

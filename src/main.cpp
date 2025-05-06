@@ -25,14 +25,15 @@ int main(int argc, char *argv[]) {
     try {
         Action a;
         while (std::cin >> a) {
+            const bool time_valid = a.time >= prev_time;
+            const bool id_valid = 1 <= a.id && a.id <= 4;
             const bool client_valid = !a.client.empty() && std::all_of(a.client.begin(), a.client.end(),
                                                                        [](char c) {
                                                                            return std::islower(c) || std::isdigit(c);
                                                                        });
             const bool pc_valid = 1 <= a.pc && a.pc <= club.get_n_pcs();
-            const bool time_valid = a.time >= prev_time;
             prev_time = a.time;
-            if (!client_valid || !pc_valid || !time_valid) {
+            if (!time_valid || !id_valid || !client_valid || !pc_valid) {
                 std::stringstream ss;
                 ss << a;
                 throw std::runtime_error(ss.str());

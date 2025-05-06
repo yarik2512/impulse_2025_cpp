@@ -30,6 +30,9 @@ std::istream &operator>>(std::istream &in, Action &action) {
     if (ss.fail()) {
         throw std::runtime_error(input);
     }
+    if (ss >> std::ws && !ss.eof()) {
+        throw std::runtime_error(input);
+    }
     return in;
 }
 
