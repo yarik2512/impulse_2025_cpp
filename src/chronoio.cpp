@@ -5,7 +5,7 @@ std::istream &operator>>(std::istream &in, std::chrono::time_point<std::chrono::
     in >> s;
     if (s.size() != 5 || s[2] != ':' ||
         !std::isdigit(s[0]) || !std::isdigit(s[1]) ||
-        !std::isdigit(s[3]) || !std::isdigit(s[4])) {
+        !std::isdigit(s[3]) || !std::isdigit(s[4])) { // обработка формата ввода
         throw std::runtime_error("Couldn't parse time");
     }
     std::stringstream ss(s);
@@ -15,7 +15,7 @@ std::istream &operator>>(std::istream &in, std::chrono::time_point<std::chrono::
     tm.tm_mday = 1;
     tm.tm_hour = std::stoi(s.substr(0, 2));
     tm.tm_min = std::stoi(s.substr(3, 2));
-    if (in.fail() || tm.tm_hour < 0 || tm.tm_hour >= 24 || tm.tm_min < 0 || tm.tm_min >= 60) {
+    if (in.fail() || tm.tm_hour < 0 || tm.tm_hour >= 24 || tm.tm_min < 0 || tm.tm_min >= 60) { // обработка формата ввода
         throw std::runtime_error("Couldn't parse time");
     }
     time_point = std::chrono::system_clock::from_time_t(std::mktime(&tm));

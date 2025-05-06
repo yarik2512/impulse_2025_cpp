@@ -14,7 +14,7 @@ Action::Action(const time_point &time_, const int id_, std::string client_, cons
 std::istream &operator>>(std::istream &in, Action &action) {
     std::string input;
     std::getline(in, input);
-    if (input.empty()) {
+    if (input.empty()) { // обработка конца файла
         return in;
     }
     std::stringstream ss(input);
@@ -27,10 +27,7 @@ std::istream &operator>>(std::istream &in, Action &action) {
         ss >> action.pc;
         --action.pc;
     }
-    if (ss.fail()) {
-        throw std::runtime_error(input);
-    }
-    if (ss >> std::ws && !ss.eof()) {
+    if (ss.fail() || (ss >> std::ws && !ss.eof())) { // обработка формата ввода
         throw std::runtime_error(input);
     }
     return in;
