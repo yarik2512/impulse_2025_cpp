@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
         std::cout << "Failed to open input file: " << argv[1] << std::endl;
         return 0;
     }
+    std::stringstream ss;
     Club club;
     try {
         std::cin >> club;
@@ -19,15 +20,15 @@ int main(int argc, char *argv[]) {
         std::cout << e.what() << std::endl;
         return 0;
     }
-    std::cout << club.get_open_time() << std::endl;
+    ss << club.get_open_time() << std::endl;
     try {
         Action a;
         while (std::cin >> a) {
-            std::cout << a << std::endl;
+            ss << a << std::endl;
             try {
                 club.process_action(a);
             } catch (const Action &e) {
-                std::cout << e << std::endl;
+                ss << e << std::endl;
             }
         }
     } catch (const std::runtime_error &e) {
@@ -36,12 +37,13 @@ int main(int argc, char *argv[]) {
     }
     const auto remaining_clients = club.process_remaining_clients();
     for (const auto &a: remaining_clients) {
-        std::cout << a << std::endl;
+        ss << a << std::endl;
     }
-    std::cout << club.get_close_time() << std::endl;
+    ss << club.get_close_time() << std::endl;
     const auto pc_info = club.get_pc_info();
     for (int i = 0; i < pc_info.size(); ++i) {
-        std::cout << i + 1 << " " << pc_info[i].first << " " << pc_info[i].second << std::endl;
+        ss << i + 1 << " " << pc_info[i].first << " " << pc_info[i].second << std::endl;
     }
+    std::cout << ss.str();
     return 0;
 }
