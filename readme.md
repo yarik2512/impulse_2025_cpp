@@ -3,12 +3,13 @@
 ## Сборка проекта
 
 ```bash
+chmod +x build.sh
 ./build.sh
 ```
 
 ## Запуск программы
 ```bash
-./build/task ./input/test_N.txt
+./build/task input/test_N.txt
 ```
 где ```N``` - номер теста (```1-9```).
 
